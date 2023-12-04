@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  # SHORT SYNTAX
+  db1:
+    image: mongo
+    container_name: db-mongo
+    ports:
+      - "27777:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aswassaw
+      - MONGO_INITDB_ROOT_PASSWORD=aswassaw
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - "./data-mongo1:/data/db"
+  # LONG SYNTAX
+  db2:
+    image: mongo
+    container_name: db-mongo2
+    ports:
+      - "28888:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aswassaw
+      - MONGO_INITDB_ROOT_PASSWORD=aswassaw
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - type: bind
+        source: "./data-mongo2"
+        target: "/data/db"
+        read_only: false

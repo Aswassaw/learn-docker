@@ -1,0 +1,2 @@
+# Ini Komentar
+FROM alpine

@@ -1,0 +1,56 @@
+- docker image ls
+- docker image pull namaimage:tag
+- docker image rm namaimage:tag
+
+- docker container ls
+- docker container ls -a
+- docker container create --name contohredis redis:latest
+- docker container start contohredis
+- docker container stop contohredis
+- docker container logs contohredis
+- docker container logs -f contohredis
+- docker container exec -it contohredis /bin/bash
+- docker container create --name contohnginx --publish 7788:80
+- docker container create --name contohmongo --publish 27777:27017 --env MONGO_INITDB_ROOT_USERNAME=aswassaw --env MONGO_INITDB_ROOT_PASSWORD=aswassaw mongo
+- docker container stats
+- docker container create --name contohnginx --memory 100m --cpus 0.5 --publish 7654:80 nginx
+- docker container create --name mongodata --mount "type=bind,source=C:\Users\resam\Downloads\docker-data\mongodata,destination=/data/db" mongo --publish 27777:27017 --env MONGO_INITDB_ROOT_USERNAME=aswassaw --env MONGO_INITDB_ROOT_PASSWORD=aswassaw mongo
+
+- docker volume ls
+- docker volume create mongovolume
+- docker volume rm mongovolume
+- docker container rm -v mongodata
+- docker container create --name mongodata --mount "type=volume,source=mongovolume,destination=/data/db" --publish 27777:27017 --env MONGO_INITDB_ROOT_USERNAME=aswassaw --env MONGO_INITDB_ROOT_PASSWORD=aswassaw mongo
+- docker container create --name backup --mount "type=bind,source=C:\Users\resam\Downloads\docker-data\backup,destination=/backup-ini-bro" --mount "type=volume,source=mongovolume,destination=/ini-folder-sumber-backup-bro" nginx
+
+- tar cvf /backup-ini-bro/backup.tar.gz /ini-folder-sumber-backup-bro
+
+- docker container run --rm --name ubuntubackup --mount "type=bind,source=C:\Users\resam\Downloads\docker-data\backup,destination=/backup-creator" --mount "type=volume,source=mongovolume,destination=/data" ubuntu tar cvf /backup-creator/backup.tar.gz /data
+- docker container run --rm --name ubunturestore --mount "type=bind,source=C:\Users\resam\Downloads\docker-data\backup,destination=/restore-creator" --mount "type=volume,source=mongorestore,destination=/data" ubuntu bash -c "cd /data && tar xvf /restore-creator/backup.tar.gz --strip 1"
+
+- docker network ls
+- docker network create --driver bridge contohnetwork
+- docker network rm contohnetwork
+
+- docker container create --name mongodb --network mongonetwork --env MONGO_INITDB_ROOT_USERNAME=aswassaw --env MONGO_INITDB_ROOT_PASSWORD=aswassaw mongo
+- docker container create --name mongoclient --network mongonetwork --publish 8001:8081 --env ME_CONFIG_MONGODB_SERVER=mongodb --env ME_CONFIG_BASICAUTH_USERNAME=aswassaw --env ME_CONFIG_BASICAUTH_PASSWORD=aswassaw --env ME_CONFIG_MONGODB_ADMINUSERNAME=aswassaw --env ME_CONFIG_MONGODB_ADMINPASSWORD=aswassaw mongo-express
+- docker network disconnect mongonetwork mongodb
+- docker network connect mongonetwork mongodb
+
+- docker image inspect mongo-express
+- docker volume inspect mongovolume
+- docker container inspect mongoclient
+
+- docker image prune
+- docker container prune
+- docker network prune
+- docker volume prune
+- docker system prune
+
+
+
+
+
+
+
+

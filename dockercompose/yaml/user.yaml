@@ -1,0 +1,15 @@
+firstName: Andry
+lastName: Pebrianto
+hobbies:
+  - Coding
+  - Gaming
+address:
+  street: Jl. Karangtengah KM 26
+  city: Trenggalek
+  province: Jawa Timur
+  country: Indonesia
+wallet:
+  - type: cash
+    amount: 200000
+  - type: debit
+    amount: 700000

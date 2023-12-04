@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  mongodb-example:
+    image: mongo
+    container_name: mongodb-example
+    ports:
+      - "21111:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aswassaw
+      - MONGO_INITDB_ROOT_PASSWORD=aswassaw
+      - MONGO_INITDB_DATABASE=admin
+    networks:
+      - mongo_network_no_counter
+
+  mongo-express-example:
+    image: mongo-express
+    container_name: mongodb-express-example
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb-example
+      - ME_CONFIG_BASICAUTH_USERNAME=aswassaw
+      - ME_CONFIG_BASICAUTH_PASSWORD=aswassaw
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=aswassaw
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=aswassaw
+    networks:
+      - mongo_network_no_counter
+    depends_on:
+      - mongodb-example
+    # no | always | on-failure | unless-stopped
+    restart: always
+
+networks:
+  mongo_network_no_counter:
+    name: mongo_network_no_counter
+    driver: bridge

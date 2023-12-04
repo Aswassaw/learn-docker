@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # SHORT SYNTAX
+  db1:
+    image: mongo
+    container_name: db-mongo1
+    ports:
+      - "27777:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aswassaw
+      - MONGO_INITDB_ROOT_PASSWORD=aswassaw
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - "mongo-data1:/data/db"
+    networks:
+      - mongo_network_no_counter
+  # LONG SYNTAX
+  db2:
+    image: mongo
+    container_name: db-mongo2
+    ports:
+      - "29999:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aswassaw
+      - MONGO_INITDB_ROOT_PASSWORD=aswassaw
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - type: volume
+        source: "mongo-data2"
+        target: "/data/db"
+        read_only: false
+    networks:
+      - mongo_network_no_counter
+
+volumes:
+  mongo-data1:
+    name: mongo-data1
+  mongo-data2:
+    name: mongo-data2
+
+networks:
+  mongo_network_no_counter:
+    name: mongo_network_no_counter
+    driver: bridge

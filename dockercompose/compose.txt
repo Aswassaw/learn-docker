@@ -1,0 +1,12 @@
+- docker compose create
+- docker compose start
+- docker compose ps
+- docker compose ps -a
+- docker compose stop
+- docker compose down
+- docker compose ls
+- docker compose ls -a
+- docker events --filter 'container=namacontainer'
+- docker compose build
+- docker compose -f namafile.yaml create
+- docker compose -f docker-compose.yaml -f dev.yaml create
